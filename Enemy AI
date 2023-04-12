@@ -1,0 +1,40 @@
+using UnityEngine;
+
+public class EnemyAI : MonoBehaviour
+{
+    public float speed = 5f; // speed of enemy movement
+    public Transform player; // reference to player object
+    public GameObject projectilePrefab; // reference to projectile prefab
+    public float projectileSpeed = 10f; // speed of projectile
+    public float fireRate = 1f; // rate of fire in seconds
+    private float nextFireTime = 0f; // time until next shot
+
+    // Update is called once per frame
+    void Update()
+    {
+        // calculate direction to player
+        Vector3 direction = player.position - transform.position;
+        direction.y = 0; // keep enemy at ground level
+        direction.Normalize(); // normalize direction vector
+
+        // move the enemy towards the player
+        transform.Translate(direction * speed * Time.deltaTime);
+
+        // check if it's time to fire
+        if (Time.time >= nextFireTime)
+        {
+            // calculate the direction to shoot
+            Vector3 shootDirection = player.position - transform.position;
+            shootDirection.y = 0; // keep projectile at ground level
+            shootDirection.Normalize(); // normalize direction vector
+
+            // create a new projectile and set its speed and direction
+            GameObject newProjectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+            Rigidbody projectileRb = newProjectile.GetComponent<Rigidbody>();
+            projectileRb.velocity = shootDirection * projectileSpeed;
+
+            // set the next fire time based on the fire rate
+            nextFireTime = Time.time + 1 / fireRate;
+        }
+    }
+}
