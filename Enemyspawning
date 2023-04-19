@@ -1,12 +1,16 @@
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemyAI : MonoBehaviour
 {
-    public GameObject enemyPrefab;
-    public Transform spawnPoint;
+    public GameObject player;
+    public float spawnDistance = 2f;
 
-    public void SpawnEnemy()
+    void Start()
     {
-        Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
+        // Calculate the spawn position based on the player's position and the spawn distance
+        Vector3 spawnPosition = player.transform.position + (player.transform.forward * spawnDistance);
+
+        // Spawn the enemy at the calculated position
+        transform.position = spawnPosition;
     }
 }
