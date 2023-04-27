@@ -1,0 +1,9 @@
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class PlayerDeath : MonoBehaviour {
+    public void Die() {
+        // Restart the current scene
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+}
