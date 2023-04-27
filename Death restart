@@ -1,9 +1,20 @@
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerDeath : MonoBehaviour {
-    public void Die() {
-        // Restart the current scene
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+public class PlayerPresence : MonoBehaviour {
+    private GameObject player;
+
+    void Start() {
+        // Find the player GameObject using its tag
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    void Update() {
+        // Check if the player GameObject is gone
+        if (player == null) {
+            // Restart the current scene
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 }
