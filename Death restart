@@ -1,20 +1,15 @@
-
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerPresence : MonoBehaviour {
-    private GameObject player;
+public class RestartOnHit : MonoBehaviour {
 
-    void Start() {
-        // Find the player GameObject using its tag
-        player = GameObject.FindGameObjectWithTag("Player");
+    public void RestartGame() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    void Update() {
-        // Check if the player GameObject is gone
-        if (player == null) {
-            // Restart the current scene
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
+    void OnCollisionEnter(Collision collision) {
+        RestartGame();
     }
+}
+
 }
