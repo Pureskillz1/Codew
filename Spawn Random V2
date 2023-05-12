@@ -1,0 +1,17 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class RandomSpawning : MonoBehaviour
+{
+	public GameObject EnemyAIPrefab;
+
+	void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.Space))
+		{
+			Vector3 randomSpawnPosition = new Vector3(Random.Range(330,2), 5, Random.Range(330,2));
+			Instantiate(EnemyAIPrefab, randomSpawnPosition,Quaternion.identity);
+		}
+	}
+}
