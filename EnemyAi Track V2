@@ -1,0 +1,20 @@
+using UnityEngine;
+
+public class EnemyAI : MonoBehaviour
+{
+    public float speed = 5f; // speed of enemy movement
+    public Transform player; // reference to player object
+
+
+    // Update is called once per frame
+    void Update()
+    {
+        // calculate direction to player
+        Vector3 direction =player.position - transform.position;
+        direction.y = 0; // keep enemy at ground level
+        direction.Normalize(); // normalize direction vector
+
+        // move the enemy towards the player
+        transform.Translate(direction * speed * Time.deltaTime);
+    }
+}
